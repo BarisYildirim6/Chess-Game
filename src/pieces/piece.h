@@ -28,11 +28,13 @@ class Piece {
         void setType(Type type);
         char getColor();
         char getType();
-
+        bool isMovedBefore();
+        bool isValidMove(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor);
 
     private:
         Color pieceColor;
         Type pieceType;
+        int numberOfMoves;
         char typeToChar(Type type) const;
         char colorToChar(Color color) const;
 };

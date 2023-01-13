@@ -29,10 +29,52 @@ bool Board::placePiece(Piece* piece, pair <int, int> coordinates) {
 
 bool Board::placePawns() {
     for (int i = 0; i < 8; i++) {
-        Pawn* p = new Pawn(white);
-        placePiece(p ,make_pair(1, i));
-
+        Pawn* pw = new Pawn(white);
+        Pawn* pb = new Pawn(black);
+        placePiece(pw ,make_pair(1, i));
+        placePiece(pb, make_pair(6, i));
     }
+}
+
+bool Board::isSquareOccupied(pair <int, int> coordinates) {
+    return board.at(coordinates)->getPiece() != NULL;
+}
+
+bool Board::isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) {
+    Piece* start = board.at(startCoor)->getPiece();
+    Piece* end = board.at(endCoor)->getPiece();
+    
+    // Checks if pieces exist on both squares
+    if (start == NULL || end == NULL) {
+        return false;
+    } else {
+        // Checks is the pieces are same color
+        return (start->getColor() == end->getColor());
+    }
+}
+
+bool Board::isMoveValid(pair <int, int> startCoor, pair <int, int> endCoor) {
+    // Checks if starting coordinates are on board
+    if (startCoor.first < 0 || startCoor.first > 7 || endCoor.second < 0 || startCoor.second > 7) {
+        return false;
+    }
+
+    // Checks if the ending coordinates are on board
+    if (endCoor.first < 0 || endCoor.first > 7 || endCoor.second < 0 || endCoor.second > 7) {
+        return false;
+    }
+
+    Piece* movingPiece = board.at(startCoor)->getPiece();
+    // Checks if the piece exist on the square of starting coordinates
+    if (movingPiece == NULL) {
+        return false;
+    }
+
+    // Checks if ending coordinates include a piece with same color as the piece on starting coordinates
+    if (isSquareOccupiedSameColor(startCoor, endCoor)) {
+        return false;
+    }
+
 }
 
 void Board::printBoardOnConsole() {

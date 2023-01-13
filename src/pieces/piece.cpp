@@ -24,6 +24,10 @@ char Piece::getColor() {
     return pieceColor;
 }
 
+bool Piece::isMovedBefore() {
+    return numberOfMoves > 0;
+}
+
 char Piece::getType() {
     return typeToChar(pieceType);
 }

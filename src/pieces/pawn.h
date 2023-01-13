@@ -7,9 +7,7 @@ class Pawn : public Piece {
         Pawn(Color c);
         ~Pawn();
 
-        void setIsFirst(bool first);
-    
+        
     private:
-        bool isFirst;
 };
 #endif
