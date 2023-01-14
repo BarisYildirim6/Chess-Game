@@ -2,9 +2,9 @@
 #include "pawn.h"
 
 Pawn::Pawn(Color c) : Piece(pawn, c) {
-    isFirst = true;
+
 }
 
-void Pawn::setIsFirst(bool first) {
-    isFirst = first;
+bool Pawn::isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) {
+    
 }

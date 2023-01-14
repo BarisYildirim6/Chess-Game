@@ -6,6 +6,7 @@ using namespace std;
 Piece::Piece(Type type, Color color) {
     pieceColor = color;
     pieceType = type;
+    numberOfMoves = 0;
 }
 
 Piece::~Piece() {
