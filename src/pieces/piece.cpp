@@ -6,6 +6,7 @@ using namespace std;
 Piece::Piece(Type type, Color color) {
     pieceColor = color;
     pieceType = type;
+    numberOfMoves = 0;
 }
 
 Piece::~Piece() {
@@ -22,6 +23,10 @@ void Piece::setType(Type type) {
 
 char Piece::getColor() {
     return pieceColor;
+}
+
+bool Piece::isMovedBefore() {
+    return numberOfMoves > 0;
 }
 
 char Piece::getType() {

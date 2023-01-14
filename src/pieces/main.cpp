@@ -7,5 +7,6 @@ int main() {
     board.placePawns();
     board.printBoardOnConsole();
 
+
     return 0;
 }
