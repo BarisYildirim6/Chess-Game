@@ -31,6 +31,6 @@ class Board {
 
         void printBoardOnConsole();
     private:
-        map<pair<int, int>, Square*> board;
+        map <pair <int, int>, Square*> board;
 };
 #endif
