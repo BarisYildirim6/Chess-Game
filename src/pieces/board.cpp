@@ -66,12 +66,19 @@ bool Board::isSquareOccupiedDifferentColor(pair <int, int> startCoor, pair <int,
     }
 }
 
+bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) {
+    // Does piece move 
+    bool isMovePosY ;
+    // Does piece move from top to bottom
+    bool isMoveNegY;
+}
+
 bool Board::isMoveVertical(pair <int, int> startCoor, pair <int, int> endCoor) {
-    return (startCoor.second != endCoor.second && startCoor.first == endCoor.first);
+    return (startCoor.second == endCoor.second && startCoor.first != endCoor.first);
 }
 
 bool Board::isMoveHorizontal(pair <int, int> startCoor, pair <int, int> endCoor) {
-    return (startCoor.second == endCoor.second && startCoor.first != endCoor.first);
+    return (startCoor.second != endCoor.second && startCoor.first == endCoor.first);
 }
 
 bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) {
@@ -88,8 +95,8 @@ bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) {
 bool Board::isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) {
     int xPath, yPath;
 
-    xPath = startCoor.first - endCoor.first;
-    yPath = startCoor.second - endCoor.second;
+    xPath = startCoor.second - endCoor.second;
+    yPath = startCoor.first - endCoor.first;
 
     return abs(xPath) == abs(yPath);
 }
@@ -121,6 +128,17 @@ bool Board::isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor) {
     }
 
     return true;
+}
+
+int Board::courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) {
+    if (isMoveVertical(startCoor, endCoor)) {
+        return abs(endCoor.first - startCoor.first);
+    } else if (isMoveHorizontal(startCoor, endCoor)) {
+        return abs(endCoor.second - startCoor.second);
+    } else if (isMoveDiagonal(startCoor, endCoor)) {
+        return abs(endCoor.second - startCoor.second);
+    }
+    return -1;
 }
 
 void Board::printBoardOnConsole() {

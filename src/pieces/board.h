@@ -26,6 +26,8 @@ class Board {
         bool isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor);
         bool isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor);
         bool isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor);
+        // Required calculations for move checks
+        int courseDistance(pair <int, int> startCoor, pair <int, int> endCoor);
 
         void printBoardOnConsole();
     private:
