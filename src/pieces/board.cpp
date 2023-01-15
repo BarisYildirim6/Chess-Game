@@ -68,9 +68,80 @@ bool Board::isSquareOccupiedDifferentColor(pair <int, int> startCoor, pair <int,
 
 bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) {
     // Does piece move 
-    bool isMovePosY ;
+    bool isMovePosY = startCoor.first > endCoor.first;
     // Does piece move from top to bottom
-    bool isMoveNegY;
+    bool isMovePosX = startCoor.second < endCoor.second;
+
+    int distance = courseDistance(startCoor, endCoor);
+
+    if (distance == 1 || distance == 0) {
+        return true;
+    }
+
+    if (isMoveVertical) {
+        if (isMovePosY) {
+            for (int i = startCoor.first; i >= endCoor.first; i--) {
+                if (board.at(make_pair(i, startCoor.second))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        } else {
+            for (int i = startCoor.first; i <= endCoor.first; i++) {
+                if (board.at(make_pair(i, startCoor.second))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if (isMoveHorizontal) {
+        if (isMovePosX) {
+            for (int i = startCoor.second; i <= endCoor.second; i++) {
+                if (board.at(make_pair(startCoor.first, i))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        } else {
+            for (int i = startCoor.second; i >= endCoor.second; i--) {
+                if (board.at(make_pair(startCoor.first, i))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if (isMoveDiagonal) {
+        if (isMovePosX && isMovePosY) {
+            for (int i = startCoor.first, j = startCoor.second; i >= endCoor.first && j <= endCoor.second; i--, j++) {
+                if (board.at(make_pair(i, j))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        } else if (isMovePosX) {
+            for (int i = startCoor.first, j = startCoor.second; i <= endCoor.first && j <= endCoor.second; i++, j++) {
+                if (board.at(make_pair(i, j))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        } else if (isMovePosY) {
+            for (int i = startCoor.first, j = startCoor.second; i >= endCoor.first && j >= endCoor.second; i--, j--) {
+                if (board.at(make_pair(i, j))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        } else {
+            for (int i = startCoor.first, j = startCoor.second; i <= endCoor.first && j >= endCoor.second; i++, j--) {
+                if (board.at(make_pair(i, j))->getPiece() != NULL) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    return false;
 }
 
 bool Board::isMoveVertical(pair <int, int> startCoor, pair <int, int> endCoor) {
