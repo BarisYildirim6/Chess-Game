@@ -29,6 +29,8 @@ bool Piece::isMovedBefore() {
     return numberOfMoves > 0;
 }
 
+bool Piece::isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) {}
+
 char Piece::getType() {
     return typeToChar(pieceType);
 }
