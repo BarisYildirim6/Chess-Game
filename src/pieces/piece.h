@@ -28,8 +28,8 @@ class Piece {
         void setType(Type type);
         char getColor();
         char getType();
-        bool isMovedBefore();
-        virtual bool isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor);
+        bool isMovedBefore() const;
+        virtual bool isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) const = 0;
 
     private:
         Color pieceColor;
