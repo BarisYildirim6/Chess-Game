@@ -21,6 +21,10 @@ void Piece::setType(Type type) {
     pieceType = type;
 }
 
+void Piece::increaseMoves() {
+    numberOfMoves++;
+}
+
 char Piece::getColor() {
     return pieceColor;
 }

@@ -80,14 +80,14 @@ bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) co
 
     if (isMoveVertical(startCoor, endCoor)) {
         if (isMovePosY) {
-            for (int i = startCoor.first; i >= endCoor.first; i--) {
-                if (board.at(make_pair(i, startCoor.second))->getPiece() != NULL) {
+            for (int i = startCoor.first - 1; i > endCoor.first; i--) {
+                if (isSquareOccupied(make_pair(i, startCoor.second))) {
                     return false;
                 }
             }
         } else {
-            for (int i = startCoor.first; i <= endCoor.first; i++) {
-                if (board.at(make_pair(i, startCoor.second))->getPiece() != NULL) {
+            for (int i = startCoor.first + 1; i < endCoor.first; i++) {
+                if (isSquareOccupied(make_pair(i, startCoor.second))) {
                     return false;
                 }
             }
@@ -97,14 +97,14 @@ bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) co
 
     if (isMoveHorizontal(startCoor, endCoor)) {
         if (isMovePosX) {
-            for (int i = startCoor.second; i <= endCoor.second; i++) {
-                if (board.at(make_pair(startCoor.first, i))->getPiece() != NULL) {
+            for (int i = startCoor.second + 1; i < endCoor.second; i++) {
+                if (isSquareOccupied(make_pair(i, startCoor.second))) {
                     return false;
                 }
             }
         } else {
-            for (int i = startCoor.second; i >= endCoor.second; i--) {
-                if (board.at(make_pair(startCoor.first, i))->getPiece() != NULL) {
+            for (int i = startCoor.second - 1; i > endCoor.second; i--) {
+                if (isSquareOccupied(make_pair(i, startCoor.second))) {
                     return false;
                 }
             }
@@ -114,25 +114,25 @@ bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) co
 
     if (isMoveDiagonal(startCoor, endCoor)) {
         if (isMovePosX && isMovePosY) {
-            for (int i = startCoor.first, j = startCoor.second; i >= endCoor.first && j <= endCoor.second; i--, j++) {
+            for (int i = startCoor.first - 1, j = startCoor.second + 1; i > endCoor.first && j < endCoor.second; i--, j++) {
                 if (board.at(make_pair(i, j))->getPiece() != NULL) {
                     return false;
                 }
             }
         } else if (isMovePosX) {
-            for (int i = startCoor.first, j = startCoor.second; i <= endCoor.first && j <= endCoor.second; i++, j++) {
+            for (int i = startCoor.first + 1, j = startCoor.second + 1; i <= endCoor.first && j <= endCoor.second; i++, j++) {
                 if (board.at(make_pair(i, j))->getPiece() != NULL) {
                     return false;
                 }
             }
         } else if (isMovePosY) {
-            for (int i = startCoor.first, j = startCoor.second; i >= endCoor.first && j >= endCoor.second; i--, j--) {
+            for (int i = startCoor.first - 1, j = startCoor.second - 1; i > endCoor.first && j > endCoor.second; i--, j--) {
                 if (board.at(make_pair(i, j))->getPiece() != NULL) {
                     return false;
                 }
             }
         } else {
-            for (int i = startCoor.first, j = startCoor.second; i <= endCoor.first && j >= endCoor.second; i++, j--) {
+            for (int i = startCoor.first + 1, j = startCoor.second - 1; i < endCoor.first && j > endCoor.second; i++, j--) {
                 if (board.at(make_pair(i, j))->getPiece() != NULL) {
                     return false;
                 }
@@ -156,9 +156,9 @@ bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) co
     // For white pieces, moving towards y is forward
     // For black pieces, moving towards -y is forward
     if (board.at(startCoor)->getPiece()->getColor() == white) {
-        return (endCoor.second < startCoor.second);
+        return (endCoor.first < startCoor.first);
     } else if (board.at(startCoor)->getPiece()->getColor() == black) {
-        return (endCoor.second > startCoor.second);
+        return (endCoor.first > startCoor.first);
     }
     return false;
 }
@@ -172,7 +172,7 @@ bool Board::isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) c
     return abs(xPath) == abs(yPath);
 }
 
-bool Board::isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor) const {
     // Checks if starting coordinates are on board
     if (startCoor.first < 0 || startCoor.first > 7 || endCoor.second < 0 || startCoor.second > 7) {
         return false;
@@ -210,6 +210,27 @@ int Board::courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) co
         return abs(endCoor.second - startCoor.second);
     }
     return -1;
+}
+
+bool Board::movePiece(pair <int, int> startCoor, pair <int, int> endCoor) const {
+    if (startCoor == endCoor) {
+        return false;
+    }
+
+    if (isMoveLegal(startCoor, endCoor)) {
+
+        // If the move is a capture
+        if (board.at(endCoor)->getPiece() != NULL) {
+
+        }
+        // Piece at starting coordinates
+        Piece* p = board.at(startCoor)->setPiece(NULL);
+        board.at(endCoor)->setPiece(p);
+        board.at(endCoor)->getPiece()->increaseMoves();
+        return true;
+    }
+
+    return false;
 }
 
 void Board::printBoardOnConsole() {
