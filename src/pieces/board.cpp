@@ -36,11 +36,11 @@ bool Board::placePawns() {
     }
 }
 
-bool Board::isSquareOccupied(pair <int, int> coordinates) {
+bool Board::isSquareOccupied(pair <int, int> coordinates) const {
     return board.at(coordinates)->getPiece() != NULL;
 }
 
-bool Board::isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) const {
     Piece* start = board.at(startCoor)->getPiece();
     Piece* end = board.at(endCoor)->getPiece();
     
@@ -53,7 +53,7 @@ bool Board::isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int>
     }
 }
 
-bool Board::isSquareOccupiedDifferentColor(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isSquareOccupiedDifferentColor(pair <int, int> startCoor, pair <int, int> endCoor) const {
     Piece* start = board.at(startCoor)->getPiece();
     Piece* end = board.at(endCoor)->getPiece();
     
@@ -66,7 +66,7 @@ bool Board::isSquareOccupiedDifferentColor(pair <int, int> startCoor, pair <int,
     }
 }
 
-bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) const {
     // Does piece move 
     bool isMovePosY = startCoor.first > endCoor.first;
     // Does piece move from top to bottom
@@ -144,15 +144,15 @@ bool Board::isCourseClear(pair <int, int> startCoor, pair <int, int> endCoor) {
     return false;
 }
 
-bool Board::isMoveVertical(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isMoveVertical(pair <int, int> startCoor, pair <int, int> endCoor) const {
     return (startCoor.second == endCoor.second && startCoor.first != endCoor.first);
 }
 
-bool Board::isMoveHorizontal(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isMoveHorizontal(pair <int, int> startCoor, pair <int, int> endCoor) const {
     return (startCoor.second != endCoor.second && startCoor.first == endCoor.first);
 }
 
-bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) const {
     // For white pieces, moving towards y is forward
     // For black pieces, moving towards -y is forward
     if (board.at(startCoor)->getPiece()->getColor() == white) {
@@ -163,7 +163,7 @@ bool Board::isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) {
     return false;
 }
 
-bool Board::isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) {
+bool Board::isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) const {
     int xPath, yPath;
 
     xPath = startCoor.second - endCoor.second;
@@ -201,7 +201,7 @@ bool Board::isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor) {
     return true;
 }
 
-int Board::courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) {
+int Board::courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) const {
     if (isMoveVertical(startCoor, endCoor)) {
         return abs(endCoor.first - startCoor.first);
     } else if (isMoveHorizontal(startCoor, endCoor)) {
