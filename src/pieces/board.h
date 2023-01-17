@@ -25,10 +25,12 @@ class Board {
         bool isMoveHorizontal(pair <int, int> startCoor, pair <int, int> endCoor) const;
         bool isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) const;
         bool isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) const;
-        bool isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor);
+        bool isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor)const;
         // Required calculations for move checks
         int courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) const;
+        // Moving pieces    
 
+        bool movePiece(pair <int, int> startCoor, pair <int, int> endCoor) const;
         void printBoardOnConsole();
     private:
         map <pair <int, int>, Square*> board;

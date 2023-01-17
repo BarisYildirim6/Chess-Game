@@ -26,6 +26,7 @@ class Piece {
 
         void setColor(Color color);
         void setType(Type type);
+        void increaseMoves();
         char getColor();
         char getType();
         bool isMovedBefore() const;
