@@ -9,10 +9,6 @@ Piece::Piece(Type type, Color color) {
     numberOfMoves = 0;
 }
 
-Piece::~Piece() {
-
-}
-
 void Piece::setColor(Color color) {
     pieceColor = color;
 }

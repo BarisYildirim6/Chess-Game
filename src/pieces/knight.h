@@ -6,7 +6,7 @@
 class Knight : public Piece {
     public:
         Knight(Color c);
-        ~Knight();
+        ~Knight() override = default;
         bool isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) const override;
     private:
 };

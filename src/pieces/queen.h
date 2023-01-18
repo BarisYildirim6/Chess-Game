@@ -1,13 +1,14 @@
-#ifndef ROOK_H
-#define ROOK_H
+#ifndef QUEEN_H
+#define QUEEN_H
 #include "board.h"
 #include "piece.h"
 
-class Rook : public Piece {
+class Quenn : public Piece {
     public:
-        Rook(Color c);
-        ~Rook() override = default;
+        Quenn(Color c);
+        ~Quenn() override = default;
         bool isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) const override;
     private:
 };
+
 #endif

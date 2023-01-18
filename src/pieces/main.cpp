@@ -8,6 +8,8 @@ int main() {
     board.placeKnights();
     board.placeBishops();
     board.placeRooks();
+    board.placeQueens();
+    board.placeKings();
     board.printBoardOnConsole();
     cout << board.movePiece(make_pair(6,4), make_pair(5,4)) << endl;
     board.printBoardOnConsole();
