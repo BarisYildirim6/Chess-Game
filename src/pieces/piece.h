@@ -22,7 +22,7 @@ enum Color {
 class Piece {
     public:
         Piece(Type type, Color color);
-        ~Piece();
+        virtual ~Piece() = default;
 
         void setColor(Color color);
         void setType(Type type);
