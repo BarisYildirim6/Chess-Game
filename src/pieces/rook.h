@@ -1,12 +1,12 @@
-#ifndef PAWN_H
-#define PAWN_H
+#ifndef ROOK_H
+#define ROOK_H
 #include "board.h"
 #include "piece.h"
 
-class Pawn : public Piece {
+class Rook : public Piece {
     public:
-        Pawn(Color c);
-        ~Pawn();
+        Rook(Color c);
+        ~Rook();
         bool isMoveValid(const Board *board, const std::pair<int, int> startCoor, const std::pair<int, int> endCoor) const override;
     private:
 };

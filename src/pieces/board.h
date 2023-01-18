@@ -15,6 +15,9 @@ class Board {
         bool placePiece(Piece* piece, pair <int, int>);
         // Placement of pieces
         bool placePawns();
+        bool placeBishops();
+        bool placeKnights();
+        bool placeRooks();
         // Required checks for squares
         bool isSquareOccupied(pair <int, int> coordinates) const;
         bool isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) const;
@@ -25,6 +28,7 @@ class Board {
         bool isMoveHorizontal(pair <int, int> startCoor, pair <int, int> endCoor) const;
         bool isMoveForward(pair <int, int> startCoor, pair <int, int> endCoor) const;
         bool isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) const;
+        bool isMoveKnight(pair <int, int> startCoor, pair <int, int> endCoor) const;
         bool isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor)const;
         // Required calculations for move checks
         int courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) const;

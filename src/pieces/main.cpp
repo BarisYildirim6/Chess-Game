@@ -5,10 +5,15 @@ using namespace std;
 int main() {
     Board board;
     board.placePawns();
+    board.placeKnights();
+    board.placeBishops();
+    board.placeRooks();
     board.printBoardOnConsole();
-    cout << board.movePiece(make_pair(6,2), make_pair(5,2)) << endl;
+    cout << board.movePiece(make_pair(6,4), make_pair(5,4)) << endl;
     board.printBoardOnConsole();
-    cout << board.movePiece(make_pair(5,2), make_pair(4,2)) << endl;
+    cout << board.movePiece(make_pair(7,5), make_pair(2,0)) << endl;
+    board.printBoardOnConsole();
+    cout << board.movePiece(make_pair(1,1), make_pair(2,0)) << endl;
     board.printBoardOnConsole();
 
 

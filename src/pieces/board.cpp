@@ -3,6 +3,9 @@
 #include "board.h"
 #include "piece.h"
 #include "pawn.h"
+#include "knight.h"
+#include "bishop.h"
+#include "rook.h"
 using namespace std;
 
 Board::Board() {
@@ -34,6 +37,42 @@ bool Board::placePawns() {
         placePiece(pw ,make_pair(6, i));
         placePiece(pb, make_pair(1, i));
     }
+}
+
+bool Board::placeBishops() {
+    Bishop* bwr = new Bishop(white);
+    Bishop* bwl = new Bishop(white);
+    Bishop* bbr = new Bishop(black);
+    Bishop* bbl = new Bishop(black);
+
+    placePiece(bwr, make_pair(7, 5));
+    placePiece(bwl, make_pair(7, 2));
+    placePiece(bbr, make_pair(0, 5));
+    placePiece(bbl, make_pair(0, 2));
+}
+
+bool Board::placeKnights() {
+    Knight* kwr = new Knight(white);
+    Knight* kwl = new Knight(white);
+    Knight* kbr = new Knight(black);
+    Knight* kbl = new Knight(black);
+
+    placePiece(kwr, make_pair(7, 6));
+    placePiece(kwl, make_pair(7, 1));
+    placePiece(kbr, make_pair(0, 6));
+    placePiece(kbl, make_pair(0, 1));
+}
+
+bool Board::placeRooks() {
+    Rook* rwr = new Rook(white);
+    Rook* rwl = new Rook(white);
+    Rook* rbr = new Rook(black);
+    Rook* rbl = new Rook(black);
+
+    placePiece(rwr, make_pair(7, 7));
+    placePiece(rwl, make_pair(7, 0));
+    placePiece(rbr, make_pair(0, 7));
+    placePiece(rbl, make_pair(0, 0));
 }
 
 bool Board::isSquareOccupied(pair <int, int> coordinates) const {
@@ -170,6 +209,20 @@ bool Board::isMoveDiagonal(pair <int, int> startCoor, pair <int, int> endCoor) c
     yPath = startCoor.first - endCoor.first;
 
     return abs(xPath) == abs(yPath);
+}
+
+bool Board::isMoveKnight(pair <int, int> startCoor, pair <int, int> endCoor) const {
+    if (abs(startCoor.first - endCoor.first) == 2) {
+        if (abs(startCoor.second - endCoor.second) == 1) {
+            return true;
+        }
+    }
+    if (abs(startCoor.second - endCoor.second) == 2) {
+        if (abs(startCoor.first - endCoor.first) == 1) {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool Board::isMoveLegal(pair <int, int> startCoor, pair <int, int> endCoor) const {
