@@ -6,6 +6,8 @@
 #include "knight.h"
 #include "bishop.h"
 #include "rook.h"
+#include "queen.h"
+#include "king.h"
 using namespace std;
 
 Board::Board() {
@@ -73,6 +75,22 @@ bool Board::placeRooks() {
     placePiece(rwl, make_pair(7, 0));
     placePiece(rbr, make_pair(0, 7));
     placePiece(rbl, make_pair(0, 0));
+}
+
+bool Board::placeQueens() {
+    Quenn* qw = new Quenn(white);
+    Quenn* qb = new Quenn(black);
+
+    placePiece(qw, make_pair(7,3));
+    placePiece(qw, make_pair(0,3));
+}
+
+bool Board::placeKings() {
+    King* kw = new King(white);
+    King* kb = new King(black);
+
+    placePiece(kw, make_pair(7,4));
+    placePiece(kw, make_pair(0,4));
 }
 
 bool Board::isSquareOccupied(pair <int, int> coordinates) const {

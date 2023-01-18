@@ -18,6 +18,8 @@ class Board {
         bool placeBishops();
         bool placeKnights();
         bool placeRooks();
+        bool placeQueens();
+        bool placeKings();
         // Required checks for squares
         bool isSquareOccupied(pair <int, int> coordinates) const;
         bool isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) const;
