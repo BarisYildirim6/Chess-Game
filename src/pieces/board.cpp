@@ -11,6 +11,16 @@
 using namespace std;
 
 Board::Board() {
+    setupSquares();
+    placePawns();
+    placeKnights();
+    placeBishops();
+    placeRooks();
+    placeQueens();
+    placeKings();
+}
+
+bool Board::setupSquares() {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             if (((i % 2 == 0) && (j % 2 == 0)) || ((i % 2 != 0) && (j % 2 != 0))) {
@@ -302,6 +312,20 @@ bool Board::movePiece(pair <int, int> startCoor, pair <int, int> endCoor) const 
     }
 
     return false;
+}
+
+string Board::coordinateToNotation(pair <int, int> coordinates) const {
+    string notation = "";
+    char row = static_cast<char>(8 - coordinates.first + '0');
+    char col = static_cast<char>(coordinates.second + 'a');
+    notation = string() + col + row;
+    return notation;
+}
+
+pair <int, int> Board::notationToCoordinate(string notation) const {
+    int row = 8 - (notation[1] - '0');
+    int col = notation[0] - 'a';
+    return make_pair(row, col);
 }
 
 void Board::printBoardOnConsole() {

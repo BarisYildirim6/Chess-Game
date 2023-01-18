@@ -12,14 +12,6 @@ class Board {
     public: 
         Board();
 
-        bool placePiece(Piece* piece, pair <int, int>);
-        // Placement of pieces
-        bool placePawns();
-        bool placeBishops();
-        bool placeKnights();
-        bool placeRooks();
-        bool placeQueens();
-        bool placeKings();
         // Required checks for squares
         bool isSquareOccupied(pair <int, int> coordinates) const;
         bool isSquareOccupiedSameColor(pair <int, int> startCoor, pair <int, int> endCoor) const;
@@ -35,10 +27,23 @@ class Board {
         // Required calculations for move checks
         int courseDistance(pair <int, int> startCoor, pair <int, int> endCoor) const;
         // Moving pieces    
-
         bool movePiece(pair <int, int> startCoor, pair <int, int> endCoor) const;
+        // Move conversions
+        string coordinateToNotation(pair <int, int> coordinates) const;
+        pair <int, int> notationToCoordinate(string notation) const;
+        
         void printBoardOnConsole();
     private:
         map <pair <int, int>, Square*> board;
+
+        // Placement of pieces
+        bool setupSquares();
+        bool placePiece(Piece* piece, pair <int, int>);
+        bool placePawns();
+        bool placeBishops();
+        bool placeKnights();
+        bool placeRooks();
+        bool placeQueens();
+        bool placeKings();
 };
 #endif
